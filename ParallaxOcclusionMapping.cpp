@@ -136,11 +136,11 @@ float                       g_fBaseTextureRepeat( 1.0f );        // ベース／法線
 
 bool                        g_bVisualizeLOD( false );            // LOD 可視化（色分け）の ON/OFF
 bool                        g_bVisualizeMipLevel( false );       // ミップレベル可視化の ON/OFF
-bool                        g_bDisplayShadows( true );           // セルフオクルージョンによる影の ON/OFF
-bool                        g_bAddSpecular( true );              // スペキュラの ON/OFF
+bool                        g_bDisplayShadows( false );          // セルフオクルージョンによる影の ON/OFF
+bool                        g_bAddSpecular( false );             // スペキュラの ON/OFF
 bool                        g_bRenderPOM( true );                // POM を使うか（通常は使用）
 
-int                         g_nLODThreshold( 3 );                // 視差遮蔽マッピング（フル計算）から
+int                         g_nLODThreshold( 9 );                // 視差遮蔽マッピング（フル計算）から
                                                                  // バンプマップへ切り替えるミップレベル
 int                         g_nMinSamples( 8 );                  // 高さプロファイルをサンプリングする最小回数
 int                         g_nMaxSamples( 50 );                 // 高さプロファイルをサンプリングする最大回数
