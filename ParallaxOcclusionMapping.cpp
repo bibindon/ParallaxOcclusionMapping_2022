@@ -549,8 +549,8 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings,
 
     // VS 3.0 非対応デバイスの場合は SWVP（ソフトウェア頂点処理）に切り替える
     if( pDeviceSettings->d3d9.DeviceType != D3DDEVTYPE_REF &&
-        ( ( caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT ) == 0 || caps.VertexShaderVersion < D3DVS_VERSION( 3,
-                                                                                                              0 ) ) )
+        ( ( caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT ) == 0 ||
+            caps.VertexShaderVersion < D3DVS_VERSION( 3, 0 ) ) )
     {
         pDeviceSettings->d3d9.BehaviorFlags = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
     }
