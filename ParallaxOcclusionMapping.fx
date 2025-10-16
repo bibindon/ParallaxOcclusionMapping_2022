@@ -298,10 +298,8 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
       float fCurrHeight = 0.0;
       float fStepSize   = 1.0 / (float) nNumSteps;
       float fPrevHeight = 1.0;
-      float fNextHeight = 0.0;
 
       int    nStepIndex = 0;
-      bool   bCondition = true;
 
       float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
       float2 vTexCurrentOffset = i.texCoord;
@@ -402,7 +400,15 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
    }
 
    // ピクセルの最終色を計算
-   cResultColor = ComputeIllumination( texSample, vLightTS, vViewTS, fOcclusionShadow );
+   // ライトをちゃんとやるか否か
+   if (false)
+   {
+      cResultColor = ComputeIllumination(texSample, vLightTS, vViewTS, fOcclusionShadow);
+   }
+   else
+   {
+      cResultColor = tex2D( tBase, texSample );
+   }
 
    if ( g_bVisualizeLOD )
    {
