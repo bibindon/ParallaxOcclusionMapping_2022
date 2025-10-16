@@ -21,7 +21,7 @@
 #pragma comment(lib, "legacy_stdio_definitions.lib")
 
 //#define DEBUG_VS   // 頂点シェーダのデバッグを有効にするにはコメントアウトを外す
-//#define DEBUG_PS   // ピクセルシェーダのデバッグを有効にするにはコメントアウトを外す
+#define DEBUG_PS   // ピクセルシェーダのデバッグを有効にするにはコメントアウトを外す
 
 
 //--------------------------------------------------------------------------------------
@@ -142,8 +142,8 @@ bool                        g_bRenderPOM( true );                // POM を使うか
 
 int                         g_nLODThreshold( 9 );                // 視差遮蔽マッピング（フル計算）から
                                                                  // バンプマップへ切り替えるミップレベル
-int                         g_nMinSamples( 8 );                  // 高さプロファイルをサンプリングする最小回数
-int                         g_nMaxSamples( 50 );                 // 高さプロファイルをサンプリングする最大回数
+int                         g_nMinSamples( 4 );                  // 高さプロファイルをサンプリングする最小回数
+int                         g_nMaxSamples( 4 );                 // 高さプロファイルをサンプリングする最大回数
 float                       g_fShadowSoftening( 0.58f );         // ソフトシャドウのぼかし係数
 float                       g_fHeightScale;                      // 高さマップの有効レンジ（スケール）
 
@@ -601,6 +601,8 @@ HRESULT LoadEffectFile()
     // D3DXSHADER_DEBUG を指定するとシェーダ内にデバッグ情報が埋め込まれる。
     // デバッグ体験は向上するが、最適化と実行結果はリリース相当と同じ。
     dwShaderFlags |= D3DXSHADER_DEBUG;
+//    dwShaderFlags |= D3DXSHADER_NO_PRESHADER;
+//    dwShaderFlags |= D3DXSHADER_SKIPOPTIMIZATION;
     #endif
 
 #ifdef DEBUG_VS

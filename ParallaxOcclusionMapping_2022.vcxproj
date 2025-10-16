@@ -407,7 +407,12 @@
     <ClCompile Include="ParallaxOcclusionMapping.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ParallaxOcclusionMapping.fx" />
+    <FxCompile Include="ParallaxOcclusionMapping.fx">
+      <FileType>Document</FileType>
+      <EnableDebuggingInformation Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</EnableDebuggingInformation>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">2.0</ShaderModel>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h" />
