@@ -303,7 +303,10 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
 
       float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
       float2 vTexCurrentOffset = i.texCoord;
+
+      // 今どの深さの層（Layer）までレイを進めたか
       float  fCurrentBound     = 1.0;
+
       float  fParallaxAmount   = 0.0;
 
       float2 pt1 = 0;
