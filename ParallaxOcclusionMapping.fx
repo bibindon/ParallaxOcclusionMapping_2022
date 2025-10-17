@@ -18,44 +18,44 @@
 // ƒOƒ[ƒoƒ‹•Ï”
 //--------------------------------------------------------------------------------------
 
-texture g_baseTexture;              // ƒx[ƒXƒJƒ‰[iƒAƒ‹ƒxƒhjƒeƒNƒXƒ`ƒƒ
-texture g_nmhTexture;               // –@üƒ}ƒbƒv{‚‚³ƒ}ƒbƒv‚Ì•¡‡ƒeƒNƒXƒ`ƒƒ
+texture g_baseTexture; // ƒx[ƒXƒJƒ‰[iƒAƒ‹ƒxƒhjƒeƒNƒXƒ`ƒƒ
+texture g_nmhTexture; // –@üƒ}ƒbƒv{‚‚³ƒ}ƒbƒv‚Ì•¡‡ƒeƒNƒXƒ`ƒƒ
 
-float4 g_materialAmbientColor;      // ƒ}ƒeƒŠƒAƒ‹‚ÌŠÂ‹«F
-float4 g_materialDiffuseColor;      // ƒ}ƒeƒŠƒAƒ‹‚ÌŠgU”½ËF
-float4 g_materialSpecularColor;     // ƒ}ƒeƒŠƒAƒ‹‚Ì‹¾–Ê”½ËF
+float4 g_materialAmbientColor; // ƒ}ƒeƒŠƒAƒ‹‚ÌŠÂ‹«F
+float4 g_materialDiffuseColor; // ƒ}ƒeƒŠƒAƒ‹‚ÌŠgU”½ËF
+float4 g_materialSpecularColor; // ƒ}ƒeƒŠƒAƒ‹‚Ì‹¾–Ê”½ËF
 
-float  g_fSpecularExponent;         // ‹¾–ÊƒnƒCƒ‰ƒCƒg‚Ìw”
-bool   g_bAddSpecular;              // ‹¾–Ê¬•ª‚ğ—LŒø‰»‚·‚é‚©‚Ç‚¤‚©
+float g_fSpecularExponent; // ‹¾–ÊƒnƒCƒ‰ƒCƒg‚Ìw”
+bool g_bAddSpecular; // ‹¾–Ê¬•ª‚ğ—LŒø‰»‚·‚é‚©‚Ç‚¤‚©
 
 // ŒõŒ¹ƒpƒ‰ƒ[ƒ^:
-float3 g_LightDir;                  // Œõ‚Ì•ûŒüiƒ[ƒ‹ƒh‹óŠÔj
-float4 g_LightDiffuse;              // Œõ‚ÌŠgUF
-float4 g_LightAmbient;              // Œõ‚ÌŠÂ‹«F
+float3 g_LightDir; // Œõ‚Ì•ûŒüiƒ[ƒ‹ƒh‹óŠÔj
+float4 g_LightDiffuse; // Œõ‚ÌŠgUF
+float4 g_LightAmbient; // Œõ‚ÌŠÂ‹«F
 
-float4   g_vEye;                    // ƒJƒƒ‰ˆÊ’u
-float    g_fBaseTextureRepeat;      // ƒx[ƒX^–@üƒeƒNƒXƒ`ƒƒ‚Ìƒ^ƒCƒŠƒ“ƒOŒW”
-float    g_fHeightMapScale;         // ‚‚³ƒ}ƒbƒv‚Ì—LŒø‚È’lˆæiƒXƒP[ƒ‹j‚ğ•\‚·
+float4 g_vEye; // ƒJƒƒ‰ˆÊ’u
+float g_fBaseTextureRepeat; // ƒx[ƒX^–@üƒeƒNƒXƒ`ƒƒ‚Ìƒ^ƒCƒŠƒ“ƒOŒW”
+float g_fHeightMapScale; // ‚‚³ƒ}ƒbƒv‚Ì—LŒø‚È’lˆæiƒXƒP[ƒ‹j‚ğ•\‚·
 
 // s—ñ:
-float4x4 g_mWorld;                  // ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ
-float4x4 g_mWorldViewProjection;    // World * View * Projection s—ñ
-float4x4 g_mView;                   // ƒrƒ…[s—ñ
+float4x4 g_mWorld; // ƒIƒuƒWƒFƒNƒg‚Ìƒ[ƒ‹ƒhs—ñ
+float4x4 g_mWorldViewProjection; // World * View * Projection s—ñ
+float4x4 g_mView; // ƒrƒ…[s—ñ
 
-bool     g_bVisualizeLOD;           // LOD ‚Ì‰Â‹‰»iF•ª‚¯j‚ğs‚¤‚©
-bool     g_bVisualizeMipLevel;      // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì‰Â‹‰»‚ğs‚¤‚©
-bool     g_bDisplayShadows;         // ƒZƒ‹ƒtƒIƒNƒ‹[ƒWƒ‡ƒ“‚ÉŠî‚Ã‚­‰e‚ğ•\¦‚·‚é‚©
+bool g_bVisualizeLOD; // LOD ‚Ì‰Â‹‰»iF•ª‚¯j‚ğs‚¤‚©
+bool g_bVisualizeMipLevel; // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì‰Â‹‰»‚ğs‚¤‚©
+bool g_bDisplayShadows; // ƒZƒ‹ƒtƒIƒNƒ‹[ƒWƒ‡ƒ“‚ÉŠî‚Ã‚­‰e‚ğ•\¦‚·‚é‚©
 
-float2   g_vTextureDims = float2(512.f, 512.f); // Às‚Éƒ~ƒbƒvƒŒƒxƒ‹‚ğŒvZ‚·‚é‚½‚ß‚Ì
+float2 g_vTextureDims = float2(512.f, 512.f); // Às‚Éƒ~ƒbƒvƒŒƒxƒ‹‚ğŒvZ‚·‚é‚½‚ß‚Ì
                                     // ƒeƒNƒXƒ`ƒƒ¡–@i•, ‚‚³j‚ğw’è
 
-int      g_nLODThreshold;           // ‹·Õ•Áƒ}ƒbƒsƒ“ƒOiƒtƒ‹ŒvZj‚©‚ç
+int g_nLODThreshold; // ‹·Õ•Áƒ}ƒbƒsƒ“ƒOiƒtƒ‹ŒvZj‚©‚ç
                                     // ƒoƒ“ƒvƒ}ƒbƒsƒ“ƒO‚ÖØ‚è‘Ö‚¦‚éƒ~ƒbƒvƒŒƒxƒ‹‚µ‚«‚¢’l
 
-float    g_fShadowSoftening;        // ƒ\ƒtƒgƒVƒƒƒhƒE‚Ì‚Ú‚©‚µŒW”
+float g_fShadowSoftening; // ƒ\ƒtƒgƒVƒƒƒhƒE‚Ì‚Ú‚©‚µŒW”
 
-int      g_nMinSamples;             // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚éÅ¬ƒTƒ“ƒvƒ‹”
-int      g_nMaxSamples;             // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚éÅ‘åƒTƒ“ƒvƒ‹”
+int g_nMinSamples; // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚éÅ¬ƒTƒ“ƒvƒ‹”
+int g_nMaxSamples; // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚éÅ‘åƒTƒ“ƒvƒ‹”
 
 
 
@@ -65,7 +65,7 @@ int      g_nMaxSamples;             // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğƒTƒ“ƒvƒŠƒ“ƒO‚·‚éÅ‘åƒTƒ
 sampler tBase =
 sampler_state
 {
-    Texture = < g_baseTexture >;
+    Texture = <g_baseTexture>;
     MipFilter = LINEAR;
     MinFilter = LINEAR;
     MagFilter = LINEAR;
@@ -73,7 +73,7 @@ sampler_state
 sampler tNormalHeightMap =
 sampler_state
 {
-    Texture = < g_nmhTexture >;
+    Texture = <g_nmhTexture>;
     MipFilter = LINEAR;
     MinFilter = LINEAR;
     MagFilter = LINEAR;
@@ -85,47 +85,47 @@ sampler_state
 //--------------------------------------------------------------------------------------
 struct VS_OUTPUT
 {
-    float4 position          : POSITION;
-    float2 texCoord          : TEXCOORD0;
-    float3 vLightTS          : TEXCOORD1;   // Ú‹óŠÔ‚ÌŒõƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
-    float3 vViewTS           : TEXCOORD2;   // Ú‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
-    float2 vParallaxOffsetTS : TEXCOORD3;   // Ú‹óŠÔ‚Å‚Ì‹·ƒIƒtƒZƒbƒgƒxƒNƒgƒ‹
-    float3 vNormalWS         : TEXCOORD4;   // ƒ[ƒ‹ƒh‹óŠÔ‚Ì–@ü
-    float3 vViewWS           : TEXCOORD5;   // ƒ[ƒ‹ƒh‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹
+    float4 position : POSITION;
+    float2 texCoord : TEXCOORD0;
+    float3 vLightTS : TEXCOORD1; // Ú‹óŠÔ‚ÌŒõƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
+    float3 vViewTS : TEXCOORD2; // Ú‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
+    float2 vParallaxOffsetTS : TEXCOORD3; // Ú‹óŠÔ‚Å‚Ì‹·ƒIƒtƒZƒbƒgƒxƒNƒgƒ‹
+    float3 vNormalWS : TEXCOORD4; // ƒ[ƒ‹ƒh‹óŠÔ‚Ì–@ü
+    float3 vViewWS : TEXCOORD5; // ƒ[ƒ‹ƒh‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹
 };
 
 
 //--------------------------------------------------------------------------------------
 // •W€“I‚È•ÏŠ·‚Æƒ‰ƒCƒeƒBƒ“ƒO‚É•K—v‚Èî•ñ‚ğŒvZ
 //--------------------------------------------------------------------------------------
-VS_OUTPUT RenderSceneVS( float4 inPositionOS  : POSITION,
-                         float2 inTexCoord    : TEXCOORD0,
-                         float3 vInNormalOS   : NORMAL,
+VS_OUTPUT RenderSceneVS(float4 inPositionOS : POSITION,
+                         float2 inTexCoord : TEXCOORD0,
+                         float3 vInNormalOS : NORMAL,
                          float3 vInBinormalOS : BINORMAL,
-                         float3 vInTangentOS  : TANGENT )
+                         float3 vInTangentOS : TANGENT)
 {
     VS_OUTPUT Out;
 
     // ˆÊ’u‚ğ•ÏŠ·‚µ‚Äo—Í
-    Out.position = mul( inPositionOS, g_mWorldViewProjection );
+    Out.position = mul(inPositionOS, g_mWorldViewProjection);
 
     // ƒeƒNƒXƒ`ƒƒÀ•W‚ğ“`”diƒ^ƒCƒ‹ŒW”‚ğ“K—pj
     Out.texCoord = inTexCoord * g_fBaseTextureRepeat;
 
     // –@üETangentEBinormal ‚ğƒIƒuƒWƒFƒNƒg‹óŠÔ¨ƒ[ƒ‹ƒh‹óŠÔ‚Ö•ÏŠ·
-    float3 vNormalWS   = mul( vInNormalOS,   (float3x3) g_mWorld );
-    float3 vTangentWS  = mul( vInTangentOS,  (float3x3) g_mWorld );
-    float3 vBinormalWS = mul( vInBinormalOS, (float3x3) g_mWorld );
+    float3 vNormalWS = mul(vInNormalOS, (float3x3) g_mWorld);
+    float3 vTangentWS = mul(vInTangentOS, (float3x3) g_mWorld);
+    float3 vBinormalWS = mul(vInBinormalOS, (float3x3) g_mWorld);
 
     // ƒ[ƒ‹ƒh‹óŠÔ‚Ì’¸“_–@ü‚ğ‚»‚Ì‚Ü‚Üo—Í
     Out.vNormalWS = vNormalWS;
 
-    vNormalWS   = normalize( vNormalWS );
-    vTangentWS  = normalize( vTangentWS );
-    vBinormalWS = normalize( vBinormalWS );
+    vNormalWS = normalize(vNormalWS);
+    vTangentWS = normalize(vTangentWS);
+    vBinormalWS = normalize(vBinormalWS);
 
     // ƒ[ƒ‹ƒh‹óŠÔ‚Å‚ÌˆÊ’u
-    float4 vPositionWS = mul( inPositionOS, g_mWorld );
+    float4 vPositionWS = mul(inPositionOS, g_mWorld);
 
     // ƒ[ƒ‹ƒh‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹i³‹K‰»‚¹‚¸j‚ğŒvZ‚µ‚Äo—Í
     float3 vViewWS = g_vEye - vPositionWS;
@@ -135,21 +135,21 @@ VS_OUTPUT RenderSceneVS( float4 inPositionOS  : POSITION,
     float3 vLightWS = g_LightDir;
 
     // ŒõE‹üƒxƒNƒgƒ‹‚ğ³‹K‰»‚µAÚ‹óŠÔ‚Ö•ÏŠ·
-    float3x3 mWorldToTangent = float3x3( vTangentWS, vBinormalWS, vNormalWS );
+    float3x3 mWorldToTangent = float3x3(vTangentWS, vBinormalWS, vNormalWS);
 
     // Ú‹óŠÔ‚ÌŒõE‹üƒxƒNƒgƒ‹‚ğo—Í
-    Out.vLightTS = mul( vLightWS, mWorldToTangent );
-    Out.vViewTS  = mul( mWorldToTangent, vViewWS  );
+    Out.vLightTS = mul(vLightWS, mWorldToTangent);
+    Out.vViewTS = mul(mWorldToTangent, vViewWS);
 
     // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚Æ‹üƒŒƒC‚ÌŒğ·ŒvZ‚É—p‚¢‚éƒŒƒC•ûŒü‚ğ‹‚ß‚é
     // i“±o‚Íã‹L˜_•¶‚ğQÆj
 
     // ‹·‚Ì‰ŠúƒIƒtƒZƒbƒg•ûŒüiÚ‹óŠÔ‚Ì xy ‚ğ³‹K‰»j
-    float2 vParallaxDirection = normalize(  Out.vViewTS.xy );
+    float2 vParallaxDirection = normalize(Out.vViewTS.xy);
 
     // ‚±‚ÌƒxƒNƒgƒ‹‚Ì’·‚³‚ªÅ‘å•ÏˆÊ—Ê‚ğŒˆ‚ß‚é
-    float fLength         = length( Out.vViewTS );
-    float fParallaxLength = sqrt( fLength * fLength - Out.vViewTS.z * Out.vViewTS.z ) / Out.vViewTS.z;
+    float fLength = length(Out.vViewTS);
+    float fParallaxLength = sqrt(fLength * fLength - Out.vViewTS.z * Out.vViewTS.z) / Out.vViewTS.z;
 
     // ÀÛ‚Ìu‹tŒü‚«v‹·ƒIƒtƒZƒbƒgƒxƒNƒgƒ‹‚ğŒvZ
     Out.vParallaxOffsetTS = vParallaxDirection * fParallaxLength;
@@ -157,7 +157,7 @@ VS_OUTPUT RenderSceneVS( float4 inPositionOS  : POSITION,
     // ‚‚³ƒ}ƒbƒv‚Ì’lˆæ‚Ìˆá‚¢‚ğ•â³‚·‚é‚½‚ßAƒA[ƒeƒBƒXƒg’²®—p‚ÌƒXƒP[ƒ‹‚ğ“K—p
     Out.vParallaxOffsetTS *= g_fHeightMapScale;
 
-   return Out;
+    return Out;
 }
 
 
@@ -166,17 +166,17 @@ VS_OUTPUT RenderSceneVS( float4 inPositionOS  : POSITION,
 //--------------------------------------------------------------------------------------
 struct PS_OUTPUT
 {
-    float4 RGBColor : COLOR0;  // o—ÍF
+    float4 RGBColor : COLOR0; // o—ÍF
 };
 
 struct PS_INPUT
 {
-   float2 texCoord          : TEXCOORD0;
-   float3 vLightTS          : TEXCOORD1;   // Ú‹óŠÔ‚ÌŒõƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
-   float3 vViewTS           : TEXCOORD2;   // Ú‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
-   float2 vParallaxOffsetTS : TEXCOORD3;   // Ú‹óŠÔ‚Å‚Ì‹·ƒIƒtƒZƒbƒg
-   float3 vNormalWS         : TEXCOORD4;   // ƒ[ƒ‹ƒh‹óŠÔ‚Ì–@ü
-   float3 vViewWS           : TEXCOORD5;   // ƒ[ƒ‹ƒh‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹
+    float2 texCoord : TEXCOORD0;
+    float3 vLightTS : TEXCOORD1; // Ú‹óŠÔ‚ÌŒõƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
+    float3 vViewTS : TEXCOORD2; // Ú‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹i³‹K‰»‚µ‚Ä‚¢‚È‚¢j
+    float2 vParallaxOffsetTS : TEXCOORD3; // Ú‹óŠÔ‚Å‚Ì‹·ƒIƒtƒZƒbƒg
+    float3 vNormalWS : TEXCOORD4; // ƒ[ƒ‹ƒh‹óŠÔ‚Ì–@ü
+    float3 vViewWS : TEXCOORD5; // ƒ[ƒ‹ƒh‹óŠÔ‚Ì‹üƒxƒNƒgƒ‹
 };
 
 
@@ -186,33 +186,33 @@ struct PS_INPUT
 // à–¾:    w’èƒsƒNƒZƒ‹‚Ì‘®«ƒeƒNƒXƒ`ƒƒ‚ÆŒõƒxƒNƒgƒ‹‚ğ—p‚¢‚Ä
 //          Phong •—‚ÌÆ–¾‚ğŒvZ‚·‚é
 //--------------------------------------------------------------------------------------
-float4 ComputeIllumination( float2 texCoord, float3 vLightTS, float3 vViewTS, float fOcclusionShadow )
+float4 ComputeIllumination(float2 texCoord, float3 vLightTS, float3 vViewTS, float fOcclusionShadow)
 {
-   // –@üƒ}ƒbƒv‚©‚ç–@üiÚ‹óŠÔj‚ğƒTƒ“ƒvƒ‹‚µ‚Ä³‹K‰»
-   float3 vNormalTS = normalize( tex2D( tNormalHeightMap, texCoord ) * 2 - 1 );
+    // –@üƒ}ƒbƒv‚©‚ç–@üiÚ‹óŠÔj‚ğƒTƒ“ƒvƒ‹‚µ‚Ä³‹K‰»
+    float3 vNormalTS = normalize(tex2D(tNormalHeightMap, texCoord) * 2 - 1);
 
-   // ƒx[ƒXƒJƒ‰[‚ğƒTƒ“ƒvƒ‹
-   float4 cBaseColor = tex2D( tBase, texCoord );
+    // ƒx[ƒXƒJƒ‰[‚ğƒTƒ“ƒvƒ‹
+    float4 cBaseColor = tex2D(tBase, texCoord);
 
-   // ŠgU”½Ë¬•ª‚ğŒvZ
-   float3 vLightTSAdj = float3( vLightTS.x, -vLightTS.y, vLightTS.z );
+    // ŠgU”½Ë¬•ª‚ğŒvZ
+    float3 vLightTSAdj = float3(vLightTS.x, -vLightTS.y, vLightTS.z);
 
-   float4 cDiffuse = saturate( dot( vNormalTS, vLightTSAdj )) * g_materialDiffuseColor;
+    float4 cDiffuse = saturate(dot(vNormalTS, vLightTSAdj)) * g_materialDiffuseColor;
 
-   // •K—v‚Å‚ ‚ê‚Î‹¾–Ê¬•ª‚ğŒvZ
-   float4 cSpecular = 0;
-   if ( g_bAddSpecular )
-   {
-      float3 vReflectionTS = normalize( 2 * dot( vViewTS, vNormalTS ) * vNormalTS - vViewTS );
+    // •K—v‚Å‚ ‚ê‚Î‹¾–Ê¬•ª‚ğŒvZ
+    float4 cSpecular = 0;
+    if (g_bAddSpecular)
+    {
+        float3 vReflectionTS = normalize(2 * dot(vViewTS, vNormalTS) * vNormalTS - vViewTS);
 
-      float fRdotL = saturate( dot( vReflectionTS, vLightTSAdj ));
-      cSpecular = saturate( pow( fRdotL, g_fSpecularExponent )) * g_materialSpecularColor;
-   }
+        float fRdotL = saturate(dot(vReflectionTS, vLightTSAdj));
+        cSpecular = saturate(pow(fRdotL, g_fSpecularExponent)) * g_materialSpecularColor;
+    }
 
-   // ÅIF‚ğ‡¬
-   float4 cFinalColor = (( g_materialAmbientColor + cDiffuse ) * cBaseColor + cSpecular ) * fOcclusionShadow;
+    // ÅIF‚ğ‡¬
+    float4 cFinalColor = ((g_materialAmbientColor + cDiffuse) * cBaseColor + cSpecular) * fOcclusionShadow;
 
-   return cFinalColor;
+    return cFinalColor;
 }
 
 
@@ -224,268 +224,263 @@ float4 ComputeIllumination( float2 texCoord, float3 vLightTS, float3 vViewTS, fl
 //       ƒgƒOƒ‹‚·‚éˆ—‚Í•Ê‚ÌÅ“K‚È•û–@‚Ås‚¤‚×‚«‚Å‚·B
 //       ‚±‚±‚Å‚Í‹³Ş‚Æ‚µ‚Ä•ª‚©‚è‚â‚·‚­À‘•‚µ‚Ä‚¢‚Ü‚·B
 //--------------------------------------------------------------------------------------
-float4 RenderScenePS( PS_INPUT i ) : COLOR0
+float4 RenderScenePS(PS_INPUT i) : COLOR0
 {
 
-   // •âŠÔ‚³‚ê‚½ƒxƒNƒgƒ‹‚ğ³‹K‰»
-   float3 vViewTS   = normalize( i.vViewTS  );
-   float3 vViewWS   = normalize( i.vViewWS  );
-   float3 vLightTS  = normalize( i.vLightTS );
-   float3 vNormalWS = normalize( i.vNormalWS );
+    // •âŠÔ‚³‚ê‚½ƒxƒNƒgƒ‹‚ğ³‹K‰»
+    float3 vViewTS = normalize(i.vViewTS);
+    float3 vViewWS = normalize(i.vViewWS);
+    float3 vLightTS = normalize(i.vLightTS);
+    float3 vNormalWS = normalize(i.vNormalWS);
 
-   float4 cResultColor = float4( 0, 0, 0, 1 );
+    float4 cResultColor = float4(0, 0, 0, 1);
 
-   // ƒsƒNƒZƒ‹ƒVƒF[ƒ_“à‚Åƒ~ƒbƒvƒŒƒxƒ‹‚ğ–¾¦“I‚ÉŒvZ‚µA
-   // ƒtƒ‹ POM ‚©‚çƒoƒ“ƒvƒ}ƒbƒsƒ“ƒO‚Ö‚Ì LOD Ø‘Ö‚ğs‚¤“K‰®‚ÌÀ‘•B
-   // Ú×‚Æ—˜“_‚Í‘Oq‚Ì˜_•¶‚ğQÆB
+    // ƒsƒNƒZƒ‹ƒVƒF[ƒ_“à‚Åƒ~ƒbƒvƒŒƒxƒ‹‚ğ–¾¦“I‚ÉŒvZ‚µA
+    // ƒtƒ‹ POM ‚©‚çƒoƒ“ƒvƒ}ƒbƒsƒ“ƒO‚Ö‚Ì LOD Ø‘Ö‚ğs‚¤“K‰®‚ÌÀ‘•B
+    // Ú×‚Æ—˜“_‚Í‘Oq‚Ì˜_•¶‚ğQÆB
 
-   // Œ»İ‚ÌŒù”z‚ğŒvZ
-   float2 fTexCoordsPerSize = i.texCoord * g_vTextureDims;
+    // Œ»İ‚ÌŒù”z‚ğŒvZ
+    float2 fTexCoordsPerSize = i.texCoord * g_vTextureDims;
 
-   // ddx/ddy ‚Å x, y ‚Ì”÷•ª‚ğˆê“x‚Éæ“¾‚µÅ“K‰»
-   float2 dxSize, dySize;
-   float2 dx, dy;
+    // ddx/ddy ‚Å x, y ‚Ì”÷•ª‚ğˆê“x‚Éæ“¾‚µÅ“K‰»
+    float2 dxSize, dySize;
+    float2 dx, dy;
 
-   float4( dxSize, dx ) = ddx( float4( fTexCoordsPerSize, i.texCoord ) );
-   float4( dySize, dy ) = ddy( float4( fTexCoordsPerSize, i.texCoord ) );
+    float4(dxSize, dx) = ddx(float4(fTexCoordsPerSize, i.texCoord));
+    float4(dySize, dy) = ddy(float4(fTexCoordsPerSize, i.texCoord));
 
-   float  fMipLevel;
-   float  fMipLevelInt;    // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì®”•”
-   float  fMipLevelFrac;   // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì¬”•”i•âŠÔ‚Ég—pj
+    float fMipLevel;
+    float fMipLevelInt; // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì®”•”
+    float fMipLevelFrac; // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì¬”•”i•âŠÔ‚Ég—pj
 
-   float  fMinTexCoordDelta;
-   float2 dTexCoords;
+    float fMinTexCoordDelta;
+    float2 dTexCoords;
 
-   // u ‚Æ v ‚Ì•Ï‰»—Ê‚Ì“ñæ˜aiƒ}ƒCƒiƒ€[ƒuj
-   dTexCoords = dxSize * dxSize + dySize * dySize;
+    // u ‚Æ v ‚Ì•Ï‰»—Ê‚Ì“ñæ˜aiƒ}ƒCƒiƒ€[ƒuj
+    dTexCoords = dxSize * dxSize + dySize * dySize;
 
-   // •W€“I‚Èƒ~ƒbƒvƒ}ƒbƒsƒ“ƒO‚Å‚Í max ‚ğ—p‚¢‚é
-   fMinTexCoordDelta = max( dTexCoords.x, dTexCoords.y );
+    // •W€“I‚Èƒ~ƒbƒvƒ}ƒbƒsƒ“ƒO‚Å‚Í max ‚ğ—p‚¢‚é
+    fMinTexCoordDelta = max(dTexCoords.x, dTexCoords.y);
 
-   // Œ»İ‚Ìƒ~ƒbƒvƒŒƒxƒ‹‚ğŒvZi*0.5 ‚ÍÀ¿“I‚É sqrt ‚É‘Š“–j
-   fMipLevel = max( 0.5 * log2( fMinTexCoordDelta ), 0 );
+    // Œ»İ‚Ìƒ~ƒbƒvƒŒƒxƒ‹‚ğŒvZi*0.5 ‚ÍÀ¿“I‚É sqrt ‚É‘Š“–j
+    fMipLevel = max(0.5 * log2(fMinTexCoordDelta), 0);
 
-   // ‚Ü‚¸‚Í“ü—Í‚ÌƒeƒNƒXƒ`ƒƒÀ•W‚ÅƒTƒ“ƒvƒ‹i=ƒoƒ“ƒvƒ}ƒbƒv‘Š“–j
-   float2 texSample = i.texCoord;
+    // ‚Ü‚¸‚Í“ü—Í‚ÌƒeƒNƒXƒ`ƒƒÀ•W‚ÅƒTƒ“ƒvƒ‹i=ƒoƒ“ƒvƒ}ƒbƒv‘Š“–j
+    float2 texSample = i.texCoord;
 
-   // LOD ‹Šo‰»‚Ì‚½‚ß‚ÌæZFig_nLODThreshold ‚Ìà–¾QÆj
-   float4 cLODColoring = float4( 1, 1, 3, 1 );
+    // LOD ‹Šo‰»‚Ì‚½‚ß‚ÌæZFig_nLODThreshold ‚Ìà–¾QÆj
+    float4 cLODColoring = float4(1, 1, 3, 1);
 
-   float fOcclusionShadow = 1.0;
+    float fOcclusionShadow = 1.0;
 
-   if ( fMipLevel <= (float) g_nLODThreshold )
-   {
-      //===============================================//
-      // ‹·Õ•Áƒ}ƒbƒsƒ“ƒO‚ÌƒIƒtƒZƒbƒgŒvZ          //
-      //===============================================//
+    if (fMipLevel <= (float) g_nLODThreshold)
+    {
+        //===============================================//
+        // ‹·Õ•Áƒ}ƒbƒsƒ“ƒO‚ÌƒIƒtƒZƒbƒgŒvZ          //
+        //===============================================//
 
-      // “®“Iƒtƒ[§Œä‚É‚æ‚èA‹Šp‚É‰‚¶‚ÄƒTƒ“ƒvƒ‹”‚ğ•ÏXB
-      // Î‚ß‹‚Ù‚ÇƒXƒeƒbƒv‚ğ×‚©‚­‚µ‚Ä¸“x‚ğã‚°‚éB
-      // Šô‰½–@ü‚Æ‹ü‚ÌŠp“x‚É‘Î‚µüŒ`‚ÉƒTƒ“ƒvƒ‹–§“x‚ğ•Ï‚¦‚éB
-      int nNumSteps = (int) lerp( g_nMaxSamples, g_nMinSamples, dot( vViewWS, vNormalWS ) );
+        // “®“Iƒtƒ[§Œä‚É‚æ‚èA‹Šp‚É‰‚¶‚ÄƒTƒ“ƒvƒ‹”‚ğ•ÏXB
+        // Î‚ß‹‚Ù‚ÇƒXƒeƒbƒv‚ğ×‚©‚­‚µ‚Ä¸“x‚ğã‚°‚éB
+        // Šô‰½–@ü‚Æ‹ü‚ÌŠp“x‚É‘Î‚µüŒ`‚ÉƒTƒ“ƒvƒ‹–§“x‚ğ•Ï‚¦‚éB
+          int nNumSteps = (int) lerp(g_nMaxSamples, g_nMinSamples, dot(vViewWS, vNormalWS));
 
-      // ‹·ƒIƒtƒZƒbƒg•ûŒüi’¸“_ƒVƒF[ƒ_‚ÅŒvZj‚É‰ˆ‚Á‚ÄA
-      // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚Æ‹üƒŒƒC‚ÌŒğ·‚ğŒ©‚Â‚¯‚éB
-      // ‚±‚ÌƒR[ƒh‚Í HLSL ‚Ì“®“Iƒtƒ[§Œä‚É“Á‰»‚µ‚Ä‚¨‚èA\•¶‚É•qŠ´B
-      // ‘¼‚Ì—á‚ÖˆÚA‚µ‚Ä‚à“®“I•ªŠò‚ğˆÛ‚µ‚½‚¢ê‡‚Í’ˆÓ‚ª•K—vB
-      //
-      // ˆÈ‰º‚Å‚Í‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğ‹æ•ªüŒ`‚Å‹ß—‚·‚éB
-      // ƒŒƒC‚Æƒvƒƒtƒ@ƒCƒ‹‚ÌŒğ“_‚ğŠÜ‚Ş2“_‚ğŒ©‚Â‚¯A
-      // ‚»‚Ì2“_‚Å’£‚éü•ª‚ÆƒŒƒC‚ÌŒğ·‚ğŒvZ‚µ‚ÄƒIƒtƒZƒbƒg‚ğ“¾‚éB
-      // Ú×‚Í‘Oq‚Ì˜_•¶‚ğQÆB
-      //
+        // ‹·ƒIƒtƒZƒbƒg•ûŒüi’¸“_ƒVƒF[ƒ_‚ÅŒvZj‚É‰ˆ‚Á‚ÄA
+        // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚Æ‹üƒŒƒC‚ÌŒğ·‚ğŒ©‚Â‚¯‚éB
+        // ‚±‚ÌƒR[ƒh‚Í HLSL ‚Ì“®“Iƒtƒ[§Œä‚É“Á‰»‚µ‚Ä‚¨‚èA\•¶‚É•qŠ´B
+        // ‘¼‚Ì—á‚ÖˆÚA‚µ‚Ä‚à“®“I•ªŠò‚ğˆÛ‚µ‚½‚¢ê‡‚Í’ˆÓ‚ª•K—vB
+        //
+        // ˆÈ‰º‚Å‚Í‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ğ‹æ•ªüŒ`‚Å‹ß—‚·‚éB
+        // ƒŒƒC‚Æƒvƒƒtƒ@ƒCƒ‹‚ÌŒğ“_‚ğŠÜ‚Ş2“_‚ğŒ©‚Â‚¯A
+        // ‚»‚Ì2“_‚Å’£‚éü•ª‚ÆƒŒƒC‚ÌŒğ·‚ğŒvZ‚µ‚ÄƒIƒtƒZƒbƒg‚ğ“¾‚éB
+        // Ú×‚Í‘Oq‚Ì˜_•¶‚ğQÆB
+        //
 
-      float fCurrHeight = 0.0;
-      float fStepSize   = 1.0 / (float) nNumSteps;
-      float fPrevHeight = 1.0;
+        float fCurrHeight = 0.0;
+        float fStepSize = 1.0 / (float) nNumSteps;
+        float fPrevHeight = 1.0;
 
-      int    nStepIndex = 0;
+        int nStepIndex = 0;
 
-      float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
-      float2 vTexCurrentOffset = i.texCoord;
+        float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
+        float2 vTexCurrentOffset = i.texCoord;
 
-      // ¡‚Ç‚Ì[‚³‚Ì‘wiLayerj‚Ü‚ÅƒŒƒC‚ği‚ß‚½‚©
-      float  fCurrentBound     = 1.0;
+        // ¡‚Ç‚Ì[‚³‚Ì‘wiLayerj‚Ü‚ÅƒŒƒC‚ği‚ß‚½‚©
+        float fCurrentBound = 1.0;
 
-      float  fParallaxAmount   = 0.0;
+        float fParallaxAmount = 0.0;
 
-      float2 pt1 = 0;
-      float2 pt2 = 0;
+        float2 pt1 = 0;
+        float2 pt2 = 0;
 
-      float2 texOffset2 = 0;
+        while (nStepIndex < nNumSteps)
+        {
+            vTexCurrentOffset -= vTexOffsetPerStep;
 
-      while ( nStepIndex < nNumSteps )
-      {
-         vTexCurrentOffset -= vTexOffsetPerStep;
+            // ‚‚³ƒ}ƒbƒv‚ğƒTƒ“ƒvƒ‹i–{—á‚Å‚Í–@üƒ}ƒbƒv‚ÌƒAƒ‹ƒtƒ@‚ÉŠi”[j
+            // tex2DgradŠÖ”‚ğg‚¤‚ÆPIX For Windows‚ª—‚¿‚é
+            // fCurrHeight = tex2Dgrad( tNormalHeightMap, vTexCurrentOffset, dx, dy ).a;
+            fCurrHeight = tex2Dlod(tNormalHeightMap, float4(vTexCurrentOffset, 0.0f, 0.0f)).a;
 
-         // ‚‚³ƒ}ƒbƒv‚ğƒTƒ“ƒvƒ‹i–{—á‚Å‚Í–@üƒ}ƒbƒv‚ÌƒAƒ‹ƒtƒ@‚ÉŠi”[j
-         // tex2DgradŠÖ”‚ğg‚¤‚ÆPIX For Windows‚ª—‚¿‚é
-         // fCurrHeight = tex2Dgrad( tNormalHeightMap, vTexCurrentOffset, dx, dy ).a;
-         fCurrHeight = tex2Dlod(tNormalHeightMap, float4(vTexCurrentOffset, 0.0f, 0.0f)).a;
+            fCurrentBound -= fStepSize;
 
-         fCurrentBound -= fStepSize;
+            if (fCurrHeight > fCurrentBound)
+            {
+                pt1 = float2(fCurrentBound, fCurrHeight);
+                pt2 = float2(fCurrentBound + fStepSize, fPrevHeight);
 
-         if ( fCurrHeight > fCurrentBound )
-         {
-            pt1 = float2( fCurrentBound, fCurrHeight );
-            pt2 = float2( fCurrentBound + fStepSize, fPrevHeight );
+                break;
+            }
+            else
+            {
+                nStepIndex++;
+                fPrevHeight = fCurrHeight;
+            }
+        }
 
-            texOffset2 = vTexCurrentOffset - vTexOffsetPerStep;
+        float fDelta2 = pt2.x - pt2.y;
+        float fDelta1 = pt1.x - pt1.y;
 
-            nStepIndex = nNumSteps + 1;
-            fPrevHeight = fCurrHeight;
-         }
-         else
-         {
-            nStepIndex++;
-            fPrevHeight = fCurrHeight;
-         }
-      }
+        float fDenominator = fDelta2 - fDelta1;
 
-      float fDelta2 = pt2.x - pt2.y;
-      float fDelta1 = pt1.x - pt1.y;
+        // SM3.0 ‚Å‚Í 0 œZ‚Í Inf ‚ğ¶¬‚µ‚Ä‚µ‚Ü‚¤‚½‚ßAƒ`ƒFƒbƒN‚ª•K—v
+        if (fDenominator == 0.0f)
+        {
+            fParallaxAmount = 0.0f;
+        }
+        else
+        {
+            fParallaxAmount = (pt1.x * fDelta2 - pt2.x * fDelta1) / fDenominator;
+        }
 
-      float fDenominator = fDelta2 - fDelta1;
+        float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount);
 
-      // SM3.0 ‚Å‚Í 0 œZ‚Í Inf ‚ğ¶¬‚µ‚Ä‚µ‚Ü‚¤‚½‚ßAƒ`ƒFƒbƒN‚ª•K—v
-      if ( fDenominator == 0.0f )
-      {
-         fParallaxAmount = 0.0f;
-      }
-      else
-      {
-         fParallaxAmount = (pt1.x * fDelta2 - pt2.x * fDelta1 ) / fDenominator;
-      }
+        // ‹^—“I‚É‰Ÿ‚µo‚³‚ê‚½•\–Êã‚ÌÅIƒeƒNƒXƒ`ƒƒÀ•W
+        float2 texSampleBase = i.texCoord - vParallaxOffset;
+        texSample = texSampleBase;
 
-      float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount );
+        // è‡’l•t‹ßi‘JˆÚ—Ìˆæj‚Ìê‡‚Ì‚İƒoƒ“ƒvƒ}ƒbƒv‚Ö•âŠÔ
+        cLODColoring = float4(1, 1, 1, 1);
 
-      // ‹^—“I‚É‰Ÿ‚µo‚³‚ê‚½•\–Êã‚ÌÅIƒeƒNƒXƒ`ƒƒÀ•W
-      float2 texSampleBase = i.texCoord - vParallaxOffset;
-      texSample = texSampleBase;
+        if (fMipLevel > (float) (g_nLODThreshold - 1))
+        {
+            // ¬”•”‚Å•âŠÔŠ„‡‚ğŒˆ’è
+            fMipLevelFrac = modf(fMipLevel, fMipLevelInt);
 
-      // è‡’l•t‹ßi‘JˆÚ—Ìˆæj‚Ìê‡‚Ì‚İƒoƒ“ƒvƒ}ƒbƒv‚Ö•âŠÔ
-      cLODColoring = float4( 1, 1, 1, 1 );
-
-      if ( fMipLevel > (float)(g_nLODThreshold - 1) )
-      {
-         // ¬”•”‚Å•âŠÔŠ„‡‚ğŒˆ’è
-         fMipLevelFrac = modf( fMipLevel, fMipLevelInt );
-
-         if ( g_bVisualizeLOD )
-         {
+            if (g_bVisualizeLOD)
+            {
             // ‰Â‹‰»—pFPOMŒ‹‰Ê¨ÂFi‘JˆÚ‘wj‚Ö•âŠÔ•\¦
-            cLODColoring = float4( 1, 1, max( 1, 2 * fMipLevelFrac ), 1 );
-         }
+                cLODColoring = float4(1, 1, max(1, 2 * fMipLevelFrac), 1);
+            }
 
-         // POM À•W‚©‚çƒoƒ“ƒvƒ}ƒbƒvÀ•W‚ÖAŒ»İ‚Ìƒ~ƒbƒvƒŒƒxƒ‹‚É‰‚¶‚ÄŠŠ‚ç‚©‚É•âŠÔ
-         texSample = lerp( texSampleBase, i.texCoord, fMipLevelFrac );
-     }
+            // POM À•W‚©‚çƒoƒ“ƒvƒ}ƒbƒvÀ•W‚ÖAŒ»İ‚Ìƒ~ƒbƒvƒŒƒxƒ‹‚É‰‚¶‚ÄŠŠ‚ç‚©‚É•âŠÔ
+            texSample = lerp(texSampleBase, i.texCoord, fMipLevelFrac);
+        }
 
-     if ( g_bDisplayShadows == true )
-     {
-        float2 vLightRayTS = vLightTS.xy * g_fHeightMapScale;
+        if (g_bDisplayShadows == true)
+        {
+            float2 vLightRayTS = vLightTS.xy * g_fHeightMapScale;
 
-        // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ÌƒZƒ‹ƒtƒIƒNƒ‹[ƒWƒ‡ƒ“‚ğl—¶‚µ‚½
-        // ƒ\ƒtƒg‚Å‚Ú‚¯‚½‰e‚ğŒvZ
-        float sh0 =  tex2Dgrad( tNormalHeightMap, texSampleBase, dx, dy ).a;
-        float shA = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.88, dx, dy ).a - sh0 - 0.88 ) *  1 * g_fShadowSoftening;
-        float sh9 = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.77, dx, dy ).a - sh0 - 0.77 ) *  2 * g_fShadowSoftening;
-        float sh8 = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.66, dx, dy ).a - sh0 - 0.66 ) *  4 * g_fShadowSoftening;
-        float sh7 = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.55, dx, dy ).a - sh0 - 0.55 ) *  6 * g_fShadowSoftening;
-        float sh6 = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.44, dx, dy ).a - sh0 - 0.44 ) *  8 * g_fShadowSoftening;
-        float sh5 = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.33, dx, dy ).a - sh0 - 0.33 ) * 10 * g_fShadowSoftening;
-        float sh4 = (tex2Dgrad( tNormalHeightMap, texSampleBase + vLightRayTS * 0.22, dx, dy ).a - sh0 - 0.22 ) * 12 * g_fShadowSoftening;
+            // ‚‚³ƒvƒƒtƒ@ƒCƒ‹‚ÌƒZƒ‹ƒtƒIƒNƒ‹[ƒWƒ‡ƒ“‚ğl—¶‚µ‚½
+            // ƒ\ƒtƒg‚Å‚Ú‚¯‚½‰e‚ğŒvZ
+            float sh0 = tex2Dgrad(tNormalHeightMap, texSampleBase, dx, dy).a;
+            float shA = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.88, dx, dy).a - sh0 - 0.88) * 1 * g_fShadowSoftening;
+            float sh9 = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.77, dx, dy).a - sh0 - 0.77) * 2 * g_fShadowSoftening;
+            float sh8 = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.66, dx, dy).a - sh0 - 0.66) * 4 * g_fShadowSoftening;
+            float sh7 = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.55, dx, dy).a - sh0 - 0.55) * 6 * g_fShadowSoftening;
+            float sh6 = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.44, dx, dy).a - sh0 - 0.44) * 8 * g_fShadowSoftening;
+            float sh5 = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.33, dx, dy).a - sh0 - 0.33) * 10 * g_fShadowSoftening;
+            float sh4 = (tex2Dgrad(tNormalHeightMap, texSampleBase + vLightRayTS * 0.22, dx, dy).a - sh0 - 0.22) * 12 * g_fShadowSoftening;
 
-        // ÀÛ‚Ì‰e‹­“x‚ğŒvZ
-        fOcclusionShadow = 1 - max( max( max( max( max( max( shA, sh9 ), sh8 ), sh7 ), sh6 ), sh5 ), sh4 );
+            // ÀÛ‚Ì‰e‹­“x‚ğŒvZ
+            fOcclusionShadow = 1 - max(max(max(max(max(max(shA, sh9), sh8), sh7), sh6), sh5), sh4);
 
-        // ã‹LŒvZ‚Í‚â‚â–¾‚é‚­‚È‚è‚ª‚¿‚È‚Ì‚Å•â³
-        fOcclusionShadow = fOcclusionShadow * 0.6 + 0.4;
-     }
-   }
+            // ã‹LŒvZ‚Í‚â‚â–¾‚é‚­‚È‚è‚ª‚¿‚È‚Ì‚Å•â³
+            fOcclusionShadow = fOcclusionShadow * 0.6 + 0.4;
+        }
+    }
 
-   // ƒsƒNƒZƒ‹‚ÌÅIF‚ğŒvZ
-   // ƒ‰ƒCƒg‚ğ‚¿‚á‚ñ‚Æ‚â‚é‚©”Û‚©
-   if (false)
-   {
-      cResultColor = ComputeIllumination(texSample, vLightTS, vViewTS, fOcclusionShadow);
-   }
-   else
-   {
-      cResultColor = tex2D( tBase, texSample );
-   }
+    // ƒsƒNƒZƒ‹‚ÌÅIF‚ğŒvZ
+    // ƒ‰ƒCƒg‚ğ‚¿‚á‚ñ‚Æ‚â‚é‚©”Û‚©
+    if (false)
+    {
+        cResultColor = ComputeIllumination(texSample, vLightTS, vViewTS, fOcclusionShadow);
+    }
+    else
+    {
+        cResultColor = tex2D(tBase, texSample);
+    }
 
-   if ( g_bVisualizeLOD )
-   {
-      cResultColor *= cLODColoring;
-   }
+    if (g_bVisualizeLOD)
+    {
+        cResultColor *= cLODColoring;
+    }
 
-   // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì‰Â‹‰»Fè‡’lŠO‚Ì—Ìˆæ‚Å‚ÍÂŒn‚É’…F
-   if ( g_bVisualizeMipLevel )
-   {
-      cResultColor = fMipLevel.xxxx;
-   }
+    // ƒ~ƒbƒvƒŒƒxƒ‹‚Ì‰Â‹‰»Fè‡’lŠO‚Ì—Ìˆæ‚Å‚ÍÂŒn‚É’…F
+    if (g_bVisualizeMipLevel)
+    {
+        cResultColor = fMipLevel.xxxx;
+    }
 
-   // HDR ‚ğg‚¤ê‡‚Ío—Í‘O‚Éƒg[ƒ“ƒ}ƒbƒv‚ª•K—vB
-   // ‚±‚Ì—á‚Å‚Ís‚Á‚Ä‚¢‚È‚¢‚½‚ßAŒvZ‚µ‚½F‚ğ‚»‚Ì‚Ü‚Üo—Í‚·‚éB
-   return cResultColor;
+    // HDR ‚ğg‚¤ê‡‚Ío—Í‘O‚Éƒg[ƒ“ƒ}ƒbƒv‚ª•K—vB
+    // ‚±‚Ì—á‚Å‚Ís‚Á‚Ä‚¢‚È‚¢‚½‚ßAŒvZ‚µ‚½F‚ğ‚»‚Ì‚Ü‚Üo—Í‚·‚éB
+    return cResultColor;
 }
 
 
 //--------------------------------------------------------------------------------------
 // ƒoƒ“ƒvƒ}ƒbƒsƒ“ƒO—pƒVƒF[ƒ_
 //--------------------------------------------------------------------------------------
-float4 RenderSceneBumpMapPS( PS_INPUT i ) : COLOR0
+float4 RenderSceneBumpMapPS(PS_INPUT i) : COLOR0
 {
-   // •âŠÔƒxƒNƒgƒ‹‚Ì³‹K‰»
-   float3 vViewTS   = normalize( i.vViewTS  );
-   float3 vLightTS  = normalize( i.vLightTS );
+    // •âŠÔƒxƒNƒgƒ‹‚Ì³‹K‰»
+    float3 vViewTS = normalize(i.vViewTS);
+    float3 vLightTS = normalize(i.vLightTS);
 
-   float4 cResultColor = float4( 0, 0, 0, 1 );
+    float4 cResultColor = float4(0, 0, 0, 1);
 
-   // “ü—Í UV ‚ÅƒTƒ“ƒvƒ‹iƒoƒ“ƒvƒ}ƒbƒv‘Š“–j
-   float2 texSample = i.texCoord;
+    // “ü—Í UV ‚ÅƒTƒ“ƒvƒ‹iƒoƒ“ƒvƒ}ƒbƒv‘Š“–j
+    float2 texSample = i.texCoord;
 
-   // ÅIF‚ğŒvZ
-   cResultColor = ComputeIllumination( texSample, vLightTS, vViewTS, 1.0f );
+    // ÅIF‚ğŒvZ
+    cResultColor = ComputeIllumination(texSample, vLightTS, vViewTS, 1.0f);
 
-   // HDR ‚Ìê‡‚Ío—Í‘O‚Éƒg[ƒ“ƒ}ƒbƒv‚ª•K—vB
-   // –{—á‚Å‚Í‚»‚Ì‚Ü‚Üo—ÍB
-   return cResultColor;
+    // HDR ‚Ìê‡‚Ío—Í‘O‚Éƒg[ƒ“ƒ}ƒbƒv‚ª•K—vB
+    // –{—á‚Å‚Í‚»‚Ì‚Ü‚Üo—ÍB
+    return cResultColor;
 }
 
 
 //--------------------------------------------------------------------------------------
 // ƒIƒtƒZƒbƒgEƒŠƒ~ƒbƒg•û®‚É‚æ‚éƒpƒ‰ƒ‰ƒbƒNƒXƒ}ƒbƒsƒ“ƒO‚ğ“K—p
 //--------------------------------------------------------------------------------------
-float4 RenderSceneParallaxMappingPS( PS_INPUT i ) : COLOR0
+float4 RenderSceneParallaxMappingPS(PS_INPUT i) : COLOR0
 {
-   const float sfHeightBias = 0.01;
+    const float sfHeightBias = 0.01;
 
-   // •âŠÔƒxƒNƒgƒ‹‚Ì³‹K‰»
-   float3 vViewTS   = normalize( i.vViewTS  );
-   float3 vLightTS  = normalize( i.vLightTS );
+    // •âŠÔƒxƒNƒgƒ‹‚Ì³‹K‰»
+    float3 vViewTS = normalize(i.vViewTS);
+    float3 vLightTS = normalize(i.vLightTS);
 
-   // Œ»İ‚ÌƒeƒNƒXƒ`ƒƒÀ•W‚Å‚‚³ƒ}ƒbƒv‚ğƒTƒ“ƒvƒ‹
-   float fCurrentHeight = tex2D( tNormalHeightMap, i.texCoord ).a;
+    // Œ»İ‚ÌƒeƒNƒXƒ`ƒƒÀ•W‚Å‚‚³ƒ}ƒbƒv‚ğƒTƒ“ƒvƒ‹
+    float fCurrentHeight = tex2D(tNormalHeightMap, i.texCoord).a;
 
-   // ƒXƒP[ƒ‹‚ÆƒoƒCƒAƒX‚ğ“K—p
-   float fHeight = fCurrentHeight * g_fHeightMapScale + sfHeightBias;
+    // ƒXƒP[ƒ‹‚ÆƒoƒCƒAƒX‚ğ“K—p
+    float fHeight = fCurrentHeight * g_fHeightMapScale + sfHeightBias;
 
-   // •K—v‚È‚çƒIƒtƒZƒbƒgEƒŠƒ~ƒbƒg‚ğÀ{
-   fHeight /= vViewTS.z;
+    // •K—v‚È‚çƒIƒtƒZƒbƒgEƒŠƒ~ƒbƒg‚ğÀ{
+    fHeight /= vViewTS.z;
 
-   // ‹·‹ß—‚ÌƒIƒtƒZƒbƒgƒxƒNƒgƒ‹‚ğŒvZ
-   float2 texSample = i.texCoord + vViewTS.xy * fHeight;
+    // ‹·‹ß—‚ÌƒIƒtƒZƒbƒgƒxƒNƒgƒ‹‚ğŒvZ
+    float2 texSample = i.texCoord + vViewTS.xy * fHeight;
 
-   float4 cResultColor = float4( 0, 0, 0, 1 );
+    float4 cResultColor = float4(0, 0, 0, 1);
 
-   // ÅIF‚ğŒvZ
-   cResultColor = ComputeIllumination( texSample, vLightTS, vViewTS, 1.0f );
+    // ÅIF‚ğŒvZ
+    cResultColor = ComputeIllumination(texSample, vLightTS, vViewTS, 1.0f);
 
-   // HDR ‚Ìê‡‚Ío—Í‘O‚Éƒg[ƒ“ƒ}ƒbƒv‚ª•K—vB
-   // –{—á‚Å‚Í‚»‚Ì‚Ü‚Üo—ÍB
-   return cResultColor;
+    // HDR ‚Ìê‡‚Ío—Í‘O‚Éƒg[ƒ“ƒ}ƒbƒv‚ª•K—vB
+    // –{—á‚Å‚Í‚»‚Ì‚Ü‚Üo—ÍB
+    return cResultColor;
 }
 
 
@@ -497,7 +492,7 @@ technique RenderSceneWithPOM
     pass P0
     {
         VertexShader = compile vs_3_0 RenderSceneVS();
-        PixelShader  = compile ps_3_0 RenderScenePS();
+        PixelShader = compile ps_3_0 RenderScenePS();
     }
 }
 
@@ -506,7 +501,7 @@ technique RenderSceneWithBumpMap
     pass P0
     {
         VertexShader = compile vs_2_0 RenderSceneVS();
-        PixelShader  = compile ps_2_0 RenderSceneBumpMapPS();
+        PixelShader = compile ps_2_0 RenderSceneBumpMapPS();
     }
 }
 technique RenderSceneWithPM
@@ -514,7 +509,7 @@ technique RenderSceneWithPM
     pass P0
     {
         VertexShader = compile vs_2_0 RenderSceneVS();
-        PixelShader  = compile ps_2_0 RenderSceneParallaxMappingPS();
+        PixelShader = compile ps_2_0 RenderSceneParallaxMappingPS();
     }
 }
 
