@@ -242,12 +242,12 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
     // 現在の勾配を計算
     float2 fTexCoordsPerSize = i.texCoord * g_vTextureDims;
 
-    // ddx/ddy で x, y の微分を一度に取得し最適化
-    float2 dxSize, dySize;
-    float2 dx, dy;
+    // ミップレベルを推定するのに使うだけ
+    float2 dxSize = ddx(fTexCoordsPerSize);
+    float2 dx = ddx(i.texCoord);
 
-    float4(dxSize, dx) = ddx(float4(fTexCoordsPerSize, i.texCoord));
-    float4(dySize, dy) = ddy(float4(fTexCoordsPerSize, i.texCoord));
+    float2 dySize = ddy(fTexCoordsPerSize);
+    float2 dy = ddy(i.texCoord);
 
     float fMipLevel;
     float fMipLevelInt; // ミップレベルの整数部
@@ -256,7 +256,8 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
     float fMinTexCoordDelta;
     float2 dTexCoords;
 
-    // u と v の変化量の二乗和（マイナムーブ）
+    // 2x2ピクセル空間で u と v の変化の大きいほう探す。
+    // そのために2x2ピクセル空間で du と dv の大きさを計算する
     dTexCoords = dxSize * dxSize + dySize * dySize;
 
     // 標準的なミップマッピングでは max を用いる
@@ -280,7 +281,7 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
         //===============================================//
 
         // 動的フロー制御により、視角に応じてサンプル数を変更。
-        // 斜め視ほどステップを細かくして精度を上げる。
+        // グレージング角であるほどステップを細かくして精度を上げる。
         // 幾何法線と視線の角度に対し線形にサンプル密度を変える。
           int nNumSteps = (int) lerp(g_nMaxSamples, g_nMinSamples, dot(vViewWS, vNormalWS));
 
