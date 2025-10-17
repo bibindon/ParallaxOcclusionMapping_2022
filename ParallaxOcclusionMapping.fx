@@ -307,17 +307,14 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
 
         // 今どの深さの層（Layer）までレイを進めたか
         float fCurrentBound = 1.0;
+        float fPrevBound = 1.0;
 
         float fParallaxAmount = 0.0;
-
-        float2 pt1 = 0;
-        float2 pt2 = 0;
 
         while (nStepIndex < nNumSteps)
         {
             vTexCurrentOffset -= vTexOffsetPerStep;
 
-            // 高さマップをサンプル（本例では法線マップのアルファに格納）
             // tex2Dgrad関数を使うとPIX For Windowsが落ちる
             // fCurrHeight = tex2Dgrad( tNormalHeightMap, vTexCurrentOffset, dx, dy ).a;
             fCurrHeight = tex2Dlod(tNormalHeightMap, float4(vTexCurrentOffset, 0.0f, 0.0f)).a;
@@ -326,22 +323,19 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
 
             if (fCurrHeight > fCurrentBound)
             {
-                pt1 = float2(fCurrentBound, fCurrHeight);
-                pt2 = float2(fCurrentBound + fStepSize, fPrevHeight);
-
                 break;
             }
-            else
-            {
-                nStepIndex++;
-                fPrevHeight = fCurrHeight;
-            }
+
+            fPrevHeight = fCurrHeight;
+            fPrevBound = fCurrentBound;
+
+            nStepIndex++;
         }
 
-        float fDelta2 = pt2.x - pt2.y;
-        float fDelta1 = pt1.x - pt1.y;
+        float fDeltaPrev = fPrevBound - fPrevHeight;
+        float fDeltaCurr = fCurrentBound - fCurrHeight;
 
-        float fDenominator = fDelta2 - fDelta1;
+        float fDenominator = fDeltaPrev - fDeltaCurr;
 
         // SM3.0 では 0 除算は Inf を生成してしまうため、チェックが必要
         if (fDenominator == 0.0f)
@@ -350,7 +344,7 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
         }
         else
         {
-            fParallaxAmount = (pt1.x * fDelta2 - pt2.x * fDelta1) / fDenominator;
+            fParallaxAmount = (fCurrentBound * fDeltaPrev - fPrevBound * fDeltaCurr) / fDenominator;
         }
 
         float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount);
@@ -869,10 +863,10 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
          }
       }   
 
-      float fDelta2 = pt2.x - pt2.y;
-      float fDelta1 = pt1.x - pt1.y;
+      float fDeltaPrev = pt2.x - pt2.y;
+      float fDeltaCurr = pt1.x - pt1.y;
       
-      float fDenominator = fDelta2 - fDelta1;
+      float fDenominator = fDeltaPrev - fDeltaCurr;
       
       // SM 3.0 requires a check for divide by zero, since that operation will generate
       // an 'Inf' number instead of 0, as previous models (conveniently) did:
@@ -882,7 +876,7 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
       }
       else
       {
-         fParallaxAmount = (pt1.x * fDelta2 - pt2.x * fDelta1 ) / fDenominator;
+         fParallaxAmount = (pt1.x * fDeltaPrev - pt2.x * fDeltaCurr ) / fDenominator;
       }
       
       float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount );
