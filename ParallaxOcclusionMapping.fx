@@ -335,6 +335,7 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
         float fDeltaPrev = fPrevBound - fPrevHeight;
         float fDeltaCurr = fCurrentBound - fCurrHeight;
 
+        // denominator = 分母
         float fDenominator = fDeltaPrev - fDeltaCurr;
 
         // SM3.0 では 0 除算は Inf を生成してしまうため、チェックが必要
