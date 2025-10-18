@@ -138,7 +138,7 @@ VS_OUTPUT RenderSceneVS(float4 inPositionOS : POSITION,
     float3x3 mWorldToTangent = float3x3(vTangentWS, vBinormalWS, vNormalWS);
 
     // 接空間の光・視線ベクトルを出力
-    Out.vLightTS = mul(vLightWS, mWorldToTangent);
+    Out.vLightTS = mul(mWorldToTangent, vLightWS);
     Out.vViewTS = mul(mWorldToTangent, vViewWS);
 
     // 高さプロファイルと視線レイの交差計算に用いるレイ方向を求める
@@ -148,8 +148,7 @@ VS_OUTPUT RenderSceneVS(float4 inPositionOS : POSITION,
     float2 vParallaxDirection = normalize(Out.vViewTS.xy);
 
     // このベクトルの長さが最大変位量を決める
-    float fLength = length(Out.vViewTS);
-    float fParallaxLength = sqrt(fLength * fLength - Out.vViewTS.z * Out.vViewTS.z) / Out.vViewTS.z;
+    float fParallaxLength = length(Out.vViewTS.xy) / Out.vViewTS.z;
 
     // 実際の「逆向き」視差オフセットベクトルを計算
     Out.vParallaxOffsetTS = vParallaxDirection * fParallaxLength;
@@ -179,42 +178,7 @@ struct PS_INPUT
     float3 vViewWS : TEXCOORD5; // ワールド空間の視線ベクトル
 };
 
-
-//--------------------------------------------------------------------------------------
-// 関数:    ComputeIllumination
-//
-// 説明:    指定ピクセルの属性テクスチャと光ベクトルを用いて
-//          Phong 風の照明を計算する
-//--------------------------------------------------------------------------------------
-float4 ComputeIllumination(float2 texCoord, float3 vLightTS, float3 vViewTS, float fOcclusionShadow)
-{
-    // 法線マップから法線（接空間）をサンプルして正規化
-    float3 vNormalTS = normalize(tex2D(tNormalHeightMap, texCoord) * 2 - 1);
-
-    // ベースカラーをサンプル
-    float4 cBaseColor = tex2D(tBase, texCoord);
-
-    // 拡散反射成分を計算
-    float3 vLightTSAdj = float3(vLightTS.x, -vLightTS.y, vLightTS.z);
-
-    float4 cDiffuse = saturate(dot(vNormalTS, vLightTSAdj)) * g_materialDiffuseColor;
-
-    // 必要であれば鏡面成分を計算
-    float4 cSpecular = 0;
-    if (g_bAddSpecular)
-    {
-        float3 vReflectionTS = normalize(2 * dot(vViewTS, vNormalTS) * vNormalTS - vViewTS);
-
-        float fRdotL = saturate(dot(vReflectionTS, vLightTSAdj));
-        cSpecular = saturate(pow(fRdotL, g_fSpecularExponent)) * g_materialSpecularColor;
-    }
-
-    // 最終色を合成
-    float4 cFinalColor = ((g_materialAmbientColor + cDiffuse) * cBaseColor + cSpecular) * fOcclusionShadow;
-
-    return cFinalColor;
-}
-
+float4 ComputeIllumination(float2 texCoord, float3 vLightTS, float3 vViewTS, float fOcclusionShadow);
 
 //--------------------------------------------------------------------------------------
 // 視差遮蔽マッピング（POM）のピクセルシェーダ
@@ -397,7 +361,7 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
 
     // ピクセルの最終色を計算
     // ライトをちゃんとやるか否か
-    if (false)
+    if (true)
     {
         cResultColor = ComputeIllumination(texSample, vLightTS, vViewTS, fOcclusionShadow);
     }
@@ -420,6 +384,41 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
     // HDR を使う場合は出力前にトーンマップが必要。
     // この例では行っていないため、計算した色をそのまま出力する。
     return cResultColor;
+}
+
+//--------------------------------------------------------------------------------------
+// 関数:    ComputeIllumination
+//
+// 説明:    指定ピクセルの属性テクスチャと光ベクトルを用いて
+//          Phong 風の照明を計算する
+//--------------------------------------------------------------------------------------
+float4 ComputeIllumination(float2 texCoord, float3 vLightTS, float3 vViewTS, float fOcclusionShadow)
+{
+    // 法線マップから法線（接空間）をサンプルして正規化
+    float3 vNormalTS = normalize(tex2D(tNormalHeightMap, texCoord) * 2 - 1);
+
+    // ベースカラーをサンプル
+    float4 cBaseColor = tex2D(tBase, texCoord);
+
+    // 拡散反射成分を計算
+    float3 vLightTSAdj = float3(vLightTS.x, -vLightTS.y, vLightTS.z);
+
+    float4 cDiffuse = saturate(dot(vNormalTS, vLightTSAdj)) * g_materialDiffuseColor;
+
+    // 必要であれば鏡面成分を計算
+    float4 cSpecular = 0;
+    if (g_bAddSpecular)
+    {
+        float3 vReflectionTS = normalize(2 * dot(vViewTS, vNormalTS) * vNormalTS - vViewTS);
+
+        float fRdotL = saturate(dot(vReflectionTS, vLightTSAdj));
+        cSpecular = saturate(pow(fRdotL, g_fSpecularExponent)) * g_materialSpecularColor;
+    }
+
+    // 最終色を合成
+    float4 cFinalColor = ((g_materialAmbientColor + cDiffuse) * cBaseColor + cSpecular) * fOcclusionShadow;
+
+    return cFinalColor;
 }
 
 
