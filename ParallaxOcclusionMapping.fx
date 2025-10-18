@@ -141,17 +141,7 @@ VS_OUTPUT RenderSceneVS(float4 inPositionOS : POSITION,
     Out.vLightTS = mul(mWorldToTangent, vLightWS);
     Out.vViewTS = mul(mWorldToTangent, vViewWS);
 
-    // 高さプロファイルと視線レイの交差計算に用いるレイ方向を求める
-    // （導出は上記論文を参照）
-
-    // 視差の初期オフセット方向（接空間の xy を正規化）
-    float2 vParallaxDirection = normalize(Out.vViewTS.xy);
-
-    // このベクトルの長さが最大変位量を決める
-    float fParallaxLength = length(Out.vViewTS.xy) / Out.vViewTS.z;
-
-    // 実際の「逆向き」視差オフセットベクトルを計算
-    Out.vParallaxOffsetTS = vParallaxDirection * fParallaxLength;
+    Out.vParallaxOffsetTS = Out.vViewTS.xy / Out.vViewTS.z;
 
     // 高さマップの値域の違いを補正するため、アーティスト調整用のスケールを適用
     Out.vParallaxOffsetTS *= g_fHeightMapScale;
