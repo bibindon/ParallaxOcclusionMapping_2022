@@ -209,8 +209,9 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
 
     if (fMipLevel <= (float) g_nLODThreshold)
     {
-        // カメラと面の角度や距離によって変えられた方が良い。
-        int nNumSteps = 1000 * g_fHeightMapScale;
+        // 視角に応じてサンプル数を変更。
+        // グレージング角であるほどステップを細かくして精度を上げる。
+        int nNumSteps = (int) lerp(g_nMaxSamples, g_nMinSamples, dot(vViewWS, vNormalWS));
 
         float fStepSize = 1.0 / (float) nNumSteps;
         int nStepIndex = 0;
