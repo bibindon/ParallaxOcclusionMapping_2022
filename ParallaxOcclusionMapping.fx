@@ -94,10 +94,6 @@ struct VS_OUTPUT
     float3 vViewWS : TEXCOORD5; // ワールド空間の視線ベクトル
 };
 
-
-//--------------------------------------------------------------------------------------
-// 標準的な変換とライティングに必要な情報を計算
-//--------------------------------------------------------------------------------------
 VS_OUTPUT RenderSceneVS(float4 inPositionOS : POSITION,
                          float2 inTexCoord : TEXCOORD0,
                          float3 vInNormalOS : NORMAL,
@@ -106,44 +102,38 @@ VS_OUTPUT RenderSceneVS(float4 inPositionOS : POSITION,
 {
     VS_OUTPUT Out;
 
-    // 位置を変換して出力
     Out.position = mul(inPositionOS, g_mWorldViewProjection);
-
-    // テクスチャ座標を伝播（タイル係数を適用）
     Out.texCoord = inTexCoord * g_fBaseTextureRepeat;
 
-    // 法線・Tangent・Binormal をオブジェクト空間→ワールド空間へ変換
     float3 vNormalWS = mul(vInNormalOS, (float3x3) g_mWorld);
     float3 vTangentWS = mul(vInTangentOS, (float3x3) g_mWorld);
     float3 vBinormalWS = mul(vInBinormalOS, (float3x3) g_mWorld);
 
-    // ワールド空間の頂点法線をそのまま出力
     Out.vNormalWS = vNormalWS;
 
     vNormalWS = normalize(vNormalWS);
     vTangentWS = normalize(vTangentWS);
     vBinormalWS = normalize(vBinormalWS);
 
-    // ワールド空間での位置
     float4 vPositionWS = mul(inPositionOS, g_mWorld);
 
-    // ワールド空間の視線ベクトル（正規化せず）を計算して出力
     float3 vViewWS = g_vEye - vPositionWS;
     Out.vViewWS = vViewWS;
 
-    // ワールド空間の光ベクトル（正規化せず）
+    // 光源ベクトル（正規化しない）
     float3 vLightWS = g_LightDir;
 
-    // 光・視線ベクトルを正規化し、接空間へ変換
+    // 光源ベクトル・カメラ方向ベクトルを接空間へ変換
     float3x3 mWorldToTangent = float3x3(vTangentWS, vBinormalWS, vNormalWS);
 
-    // 接空間の光・視線ベクトルを出力
     Out.vLightTS = mul(mWorldToTangent, vLightWS);
     Out.vViewTS = mul(mWorldToTangent, vViewWS);
 
+    // ズレ量
+    // グレージング角なら沢山ズレるし、正面を向いてるならズレない。
+    // それを表す数値
     Out.vParallaxOffsetTS = Out.vViewTS.xy / Out.vViewTS.z;
 
-    // 高さマップの値域の違いを補正するため、アーティスト調整用のスケールを適用
     Out.vParallaxOffsetTS *= g_fHeightMapScale;
 
     return Out;
@@ -172,26 +162,15 @@ float4 ComputeIllumination(float2 texCoord, float3 vLightTS, float3 vViewTS, flo
 
 //--------------------------------------------------------------------------------------
 // 視差遮蔽マッピング（POM）のピクセルシェーダ
-//
-// 注意: このシェーダには教育目的のモードが含まれています。
-//       実際のゲームや複雑なシーンでは、視覚品質（LOD、スペキュラ、影など）を
-//       トグルする処理は別の最適な方法で行うべきです。
-//       ここでは教材として分かりやすく実装しています。
 //--------------------------------------------------------------------------------------
 float4 RenderScenePS(PS_INPUT i) : COLOR0
 {
-
-    // 補間されたベクトルを正規化
     float3 vViewTS = normalize(i.vViewTS);
     float3 vViewWS = normalize(i.vViewWS);
     float3 vLightTS = normalize(i.vLightTS);
     float3 vNormalWS = normalize(i.vNormalWS);
 
     float4 cResultColor = float4(0, 0, 0, 1);
-
-    // ピクセルシェーダ内でミップレベルを明示的に計算し、
-    // フル POM からバンプマッピングへの LOD 切替を行う適応式の実装。
-    // 詳細と利点は前述の論文を参照。
 
     // 現在の勾配を計算
     float2 fTexCoordsPerSize = i.texCoord * g_vTextureDims;
@@ -234,36 +213,23 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
         // 視差遮蔽マッピングのオフセット計算          //
         //===============================================//
 
-        // 動的フロー制御により、視角に応じてサンプル数を変更。
+        // 視角に応じてサンプル数を変更。
         // グレージング角であるほどステップを細かくして精度を上げる。
-        // 幾何法線と視線の角度に対し線形にサンプル密度を変える。
-          int nNumSteps = (int) lerp(g_nMaxSamples, g_nMinSamples, dot(vViewWS, vNormalWS));
+        int nNumSteps = (int) lerp(g_nMaxSamples, g_nMinSamples, dot(vViewWS, vNormalWS));
 
-        // 視差オフセット方向（頂点シェーダで計算）に沿って、
-        // 高さプロファイルと視線レイの交差を見つける。
-        // このコードは HLSL の動的フロー制御に特化しており、構文に敏感。
-        // 他の例へ移植しても動的分岐を維持したい場合は注意が必要。
-        //
-        // 以下では高さプロファイルを区分線形で近似する。
-        // レイとプロファイルの交点を含む2点を見つけ、
-        // その2点で張る線分とレイの交差を計算してオフセットを得る。
-        // 詳細は前述の論文を参照。
-        //
+        float fStepSize = 1.0 / (float) nNumSteps;
+        int nStepIndex = 0;
 
         float fCurrHeight = 0.0;
-        float fStepSize = 1.0 / (float) nNumSteps;
         float fPrevHeight = 1.0;
 
-        int nStepIndex = 0;
 
         float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
         float2 vTexCurrentOffset = i.texCoord;
 
         // 今どの深さの層（Layer）までレイを進めたか
-        float fCurrentBound = 1.0;
-        float fPrevBound = 1.0;
-
-        float fParallaxAmount = 0.0;
+        float fCurrentLayer = 1.0;
+        float fPrevLayer = 1.0;
 
         while (nStepIndex < nNumSteps)
         {
@@ -273,33 +239,35 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
             // fCurrHeight = tex2Dgrad( tNormalHeightMap, vTexCurrentOffset, dx, dy ).a;
             fCurrHeight = tex2Dlod(tNormalHeightMap, float4(vTexCurrentOffset, 0.0f, 0.0f)).a;
 
-            fCurrentBound -= fStepSize;
+            fCurrentLayer -= fStepSize;
 
-            if (fCurrHeight > fCurrentBound)
+            if (fCurrHeight > fCurrentLayer)
             {
                 break;
             }
 
             fPrevHeight = fCurrHeight;
-            fPrevBound = fCurrentBound;
+            fPrevLayer = fCurrentLayer;
 
             nStepIndex++;
         }
 
-        float fDeltaPrev = fPrevBound - fPrevHeight;
-        float fDeltaCurr = fCurrentBound - fCurrHeight;
+        float fParallaxAmount = 0.0;
+
+        float fDeltaPrev = fPrevLayer - fPrevHeight;
+        float fDeltaCurr = fCurrentLayer - fCurrHeight;
 
         // denominator = 分母
         float fDenominator = fDeltaPrev - fDeltaCurr;
 
-        // SM3.0 では 0 除算は Inf を生成してしまうため、チェックが必要
+        // 0除算防止
         if (fDenominator == 0.0f)
         {
             fParallaxAmount = 0.0f;
         }
         else
         {
-            fParallaxAmount = (fCurrentBound * fDeltaPrev - fPrevBound * fDeltaCurr) / fDenominator;
+            fParallaxAmount = (fCurrentLayer * fDeltaPrev - fPrevLayer * fDeltaCurr) / fDenominator;
         }
 
         float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount);
@@ -314,6 +282,7 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
         if (fMipLevel > (float) (g_nLODThreshold - 1))
         {
             // 小数部で補間割合を決定
+            // （modf関数は整数部と小数部を分割する）
             fMipLevelFrac = modf(fMipLevel, fMipLevelInt);
 
             if (g_bVisualizeLOD)
@@ -819,7 +788,7 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
 
       float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
       float2 vTexCurrentOffset = i.texCoord;
-      float  fCurrentBound     = 1.0;
+      float  fCurrentLayer     = 1.0;
       float  fParallaxAmount   = 0.0;
 
       float2 pt1 = 0;
@@ -834,12 +803,12 @@ float4 RenderScenePS( PS_INPUT i ) : COLOR0
          // Sample height map which in this case is stored in the alpha channel of the normal map:
          fCurrHeight = tex2Dgrad( tNormalHeightMap, vTexCurrentOffset, dx, dy ).a;
 
-         fCurrentBound -= fStepSize;
+         fCurrentLayer -= fStepSize;
 
-         if ( fCurrHeight > fCurrentBound ) 
+         if ( fCurrHeight > fCurrentLayer ) 
          {   
-            pt1 = float2( fCurrentBound, fCurrHeight );
-            pt2 = float2( fCurrentBound + fStepSize, fPrevHeight );
+            pt1 = float2( fCurrentLayer, fCurrHeight );
+            pt2 = float2( fCurrentLayer + fStepSize, fPrevHeight );
 
             texOffset2 = vTexCurrentOffset - vTexOffsetPerStep;
 
