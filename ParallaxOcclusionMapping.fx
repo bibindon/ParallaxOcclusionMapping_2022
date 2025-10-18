@@ -209,27 +209,19 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
 
     if (fMipLevel <= (float) g_nLODThreshold)
     {
-        //===============================================//
-        // 視差遮蔽マッピングのオフセット計算          //
-        //===============================================//
-
-        // 視角に応じてサンプル数を変更。
-        // グレージング角であるほどステップを細かくして精度を上げる。
-        int nNumSteps = (int) lerp(g_nMaxSamples, g_nMinSamples, dot(vViewWS, vNormalWS));
+        // カメラと面の角度や距離によって変えられた方が良い。
+        int nNumSteps = 1000 * g_fHeightMapScale;
 
         float fStepSize = 1.0 / (float) nNumSteps;
         int nStepIndex = 0;
 
         float fCurrHeight = 0.0;
-        float fPrevHeight = 1.0;
-
 
         float2 vTexOffsetPerStep = fStepSize * i.vParallaxOffsetTS;
         float2 vTexCurrentOffset = i.texCoord;
 
         // 今どの深さの層（Layer）までレイを進めたか
         float fCurrentLayer = 1.0;
-        float fPrevLayer = 1.0;
 
         while (nStepIndex < nNumSteps)
         {
@@ -246,31 +238,10 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
                 break;
             }
 
-            fPrevHeight = fCurrHeight;
-            fPrevLayer = fCurrentLayer;
-
             nStepIndex++;
         }
 
-        float fParallaxAmount = 0.0;
-
-        float fDeltaPrev = fPrevLayer - fPrevHeight;
-        float fDeltaCurr = fCurrentLayer - fCurrHeight;
-
-        // denominator = 分母
-        float fDenominator = fDeltaPrev - fDeltaCurr;
-
-        // 0除算防止
-        if (fDenominator == 0.0f)
-        {
-            fParallaxAmount = 0.0f;
-        }
-        else
-        {
-            fParallaxAmount = (fCurrentLayer * fDeltaPrev - fPrevLayer * fDeltaCurr) / fDenominator;
-        }
-
-        float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fParallaxAmount);
+        float2 vParallaxOffset = i.vParallaxOffsetTS * (1 - fCurrentLayer);
 
         // 疑似的に押し出された表面上の最終テクスチャ座標
         float2 texSampleBase = i.texCoord - vParallaxOffset;
@@ -295,7 +266,8 @@ float4 RenderScenePS(PS_INPUT i) : COLOR0
             texSample = lerp(texSampleBase, i.texCoord, fMipLevelFrac);
         }
 
-        if (g_bDisplayShadows == true)
+        //if (g_bDisplayShadows == true)
+        if (false)
         {
             float2 vLightRayTS = vLightTS.xy * g_fHeightMapScale;
 
