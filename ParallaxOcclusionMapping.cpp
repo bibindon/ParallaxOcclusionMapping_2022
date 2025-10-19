@@ -837,10 +837,18 @@ HRESULT LoadMesh( IDirect3DDevice9* pd3dDevice, WCHAR* strFileName, ID3DXMesh** 
         ID3DXMesh* pNewMesh;
 
         // 法線マッピングに必要な Tangent / Binormal を計算
-        if( FAILED( D3DXComputeTangentFrameEx( pMesh, D3DDECLUSAGE_TEXCOORD, 0, D3DDECLUSAGE_TANGENT, 0,
-                                               D3DDECLUSAGE_BINORMAL, 0,
-                                               D3DDECLUSAGE_NORMAL, 0, 0, rgdwAdjacency, -1.01f,
-                                               -0.01f, -1.01f, &pNewMesh, NULL ) ) )
+        if( FAILED( D3DXComputeTangentFrameEx(pMesh,
+                                              D3DDECLUSAGE_TEXCOORD, 0,
+                                              D3DDECLUSAGE_TANGENT, 0,
+                                              D3DDECLUSAGE_BINORMAL, 0,
+                                              D3DDECLUSAGE_NORMAL, 0,
+                                              0,
+                                              rgdwAdjacency,
+                                              -1.01f,
+                                              -0.01f,
+                                              -1.01f,
+                                              &pNewMesh,
+                                              NULL ) ) )
         {
             return E_FAIL;
         }
@@ -991,7 +999,6 @@ void CALLBACK OnFrameRender( IDirect3DDevice9* pd3dDevice,
         // 文字列で取得するより、実際のアプリでは GetParameterByName のハンドルをキャッシュして使う方が効率的。
         V( g_pEffect->SetMatrix( "g_mWorldViewProjection", &mWorldViewProjection ) );
         V( g_pEffect->SetMatrix( "g_mWorld", &mWorld ) );
-        V( g_pEffect->SetMatrix( "g_mView", &mView ) );
         V( g_pEffect->SetVector( "g_vEye", &vEye ) );
         V( g_pEffect->SetValue( "g_fHeightMapScale", &g_fHeightScale, sizeof( float ) ) );
 
